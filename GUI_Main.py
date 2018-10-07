@@ -13,6 +13,35 @@ current_input = ""
 
 theriddle = Riddle(0)
 
+#
+#
+# autoplay stuff
+from time import *
+from random import *
+bool=False
+def changebool():
+	global bool
+	if bool:
+        	bool=False
+	else:
+		bool=True
+def autoplay(start,current_input):
+	global bool
+	if bool:
+		current=time()
+			while (current-start)<3:
+				current=time()
+		n=randint(0,1)
+		if n==0:
+			return "a"
+		else:
+			return "b"
+	else:
+		return current_input
+# autoplay stuff
+#
+#
+
 class scene_num():
 	
 	def __init__(self):
@@ -61,6 +90,22 @@ def check_input():
 		if not loadednum in viableSaves:
 			return "error, save corrupted"
 		return "Take me to the correct scene don't return anything"
+	#
+	#
+	# autoplay stuff example change
+	if current_input=="autoplay":
+		changebool()
+	if scene_number.getNum()==49:
+		start=time()
+		current_input=autoplay(start,current_input)
+		if current_input.upper()=="A":
+			scene50()
+		if current_input.upper()=="B":
+			scene51()
+	# autoplay stuff example change
+	#
+	#
+	
 	# the choice branch for the first scene.
 	# if choice A, goes to the scene where it asks to play in the backyard.
 	# if choice B, ends the game and gives the user the option to play again 
